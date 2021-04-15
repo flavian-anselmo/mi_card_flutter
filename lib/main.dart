@@ -1,82 +1,181 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 void main() {
-  return runApp(
-    MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.cyan,
-        appBar: AppBar(
-          title: Center(child: Text('Dicee')),
-          backgroundColor: Colors.cyan,
-        ),
-        body: DicePage(),
-      ),
-    ),
-  );
+  runApp(MyApp());
 }
 
-class DicePage extends StatefulWidget {
-  @override
-  _DicePageState createState() => _DicePageState();
-}
-
-class _DicePageState extends State<DicePage> {
-  int leftDice = 1;
-  int rightDice = 1;
-  _DicePageState() : super();//CONSTRACTOR 
-  void diceValue() {
-    //this function will be called once we press the button
-    leftDice = new Random().nextInt(6) + 1; //CHANGE TTHE LEFT VALUE
-    rightDice = new Random().nextInt(6) + 1; //CHANGE THE RIGHT VALUE
-  }
-
+class MyApp extends StatelessWidget {
+  // const MyApp({Key key}) : super(key: key);
+  //this widget will be created when we create a new object of myapp class
+  //it inherits from the stateless widget class
   @override
   Widget build(BuildContext context) {
-    //leftDice = 5;
-    return Center(
-      child: Row(
-        //a row usually has children (runni)
-        //use expanded to fit the image
-        //mainAxisAlignment: MainAxisAlignment.center,
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.teal,
+        appBar: AppBar(
+          title: Center(child: Text('Business Card')),
+          backgroundColor: Colors.teal,
+        ),
+        body: SafeArea(
+          //one can set the margin  using the Edgeinset.symetric(vertical:.horizontal.)
 
-        children: <Widget>[
-          Expanded(
-            //flex:1,
-            //flex prperty is just a ratio
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
 
-            // ignore: deprecated_member_use
-            child: FlatButton(
-                onPressed: () {
-                  //anonymous function
-                  //that will make when the button is pressed
-                  //print("left button pressed");
-                  setState(() {
-                    //call the function to change the value of the dice
-                    diceValue();
-                  });
-                  print(leftDice);
-                },
-                //this will be redrawn
-                child: Image.asset('images/dice$leftDice.png')),
+            children: [
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(
+                    'https://www.cnet.com/a/img/HS3XPUTZux4P4cArqVywFhwRvpw=/1200x675/2019/08/17/9e246866-e3c9-4070-a8fa-466f0c685d49/siliconvalleyteaser.jpg'),
+              ),
+              Text(
+                'Richard Hendricks',
+                style: TextStyle(
+                  fontFamily: 'Caveat',
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'CEO AT PIED PIPER',
+                style: TextStyle(
+                  fontFamily: 'DancingScript',
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                  letterSpacing: 2.5,
+                ),
+              ),
+              SizedBox(
+                width: 200,
+                height: 10,
+                child: Divider(
+                  
+                  color: Colors.white,
+
+                ),
+              ),
+              Card(
+                //one can use the list tile insteac of whta we have done
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                //padding: EdgeInsets.all(5),
+                //the widget card has no padding
+                child: Padding(
+                  padding: const EdgeInsets.all(7.5),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.phone_android,
+                        color: Colors.teal,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '+254-798-071-510',
+                        style: TextStyle(
+                          color: Colors.lightGreen,
+                          fontFamily: 'DancingScript',
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                //padding: EdgeInsets.all(5),
+                //the widget card has no padding
+                child: Padding(
+                  padding: const EdgeInsets.all(7.5),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.email,
+                        color: Colors.teal,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'richardhendricks@piedpiper.org',
+                        style: TextStyle(
+                          color: Colors.lightGreen,
+                          fontFamily: 'DancingScript',
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+            //you can change the vertical direction of the stack  up or down
+            //verticalDirection:VerticalDirection.down ,
+            //mainAxisAlignment: MainAxisAlignment.center,//center the columns
+            //mainAxisAlignment: MainAxisAlignment.spaceAround,  //create space btwn the conteiners in the column
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,  //this will create space evenly around the containers
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //crossAxisAlignment: CrossAxisAlignment.stretch, //stretch all the containers form left to right
+            //the container can only hav one child
+            //mainAxisAlignment:MainAxisAlignment.spaceBetween,
+
+            /** 
+              height: 100.0,
+              width: 100.0,  
+              //margin: EdgeInsets.fromLTRB(50, 50, 50,50),
+              margin: EdgeInsets.only(left:100,right:100,top:100,bottom:100),
+              padding:EdgeInsets.only(left: 5,right:5,top:5,bottom:5),
+              //you can set all the sides to one value using the .all() method 
+              //
+              color: Colors.white,
+              child: Center(child: Text('winner')),
+              
+            //columns
+            //this is a widget that can have many chldren unilike the the container
+            //that can only have one widget
+            
+            children: <Widget>[
+              Container(
+                color: Colors.deepOrange,
+                width: 100,
+                margin:EdgeInsets.fromLTRB(0, 0, 0, 50),
+
+              ),
+              //SizedBox(width: 160),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    color: Colors.yellow,
+                    width: 100,
+                    height:100,
+                  ),
+                  Container(
+                    color:Colors.purpleAccent,
+                    width: 100,
+                    height:100,
+                  ),
+                ],
+                //inside the space place the item btwn thw boxes 
+              ),
+
+
+              Container(
+                width: 100,
+                color: Colors.blue,
+                margin:EdgeInsets.fromLTRB(0, 0, 0, 50),
+              )
+             
+            ],
+            */
           ),
-          Expanded(
-            //flex: 1,
-            // ignore: deprecated_member_use
-            child: FlatButton(
-                onPressed: () {
-                  //print("right button pressed ");
-                  setState(() {
-                    //call the function to change the value of the dicee
-                    diceValue();
-                  });
-                  print(rightDice);
-                },
-                child: Image.asset('images/dice$rightDice.png')),
-            //child: Image.asset('images/dice1.png'),
-            //can only have one child
-          ),
-        ],
+        ),
       ),
     );
   }
